@@ -1,0 +1,6 @@
+/build
+gradle/
+gradlew
+gradlew.bat
+local.properties
+proguard-rules.pro

@@ -1,0 +1,11 @@
+{
+  "editor.formatOnSave": true,
+  "eslint.autoFixOnSave": true,
+  "eslint.alwaysShowStatus": true,
+  "prettier.disableLanguages": ["js"],
+  "files.autoSave": "onFocusChange",
+  "[javascript]": {
+    "editor.tabSize": 2,
+    "editor.formatOnSave": false
+  }
+}

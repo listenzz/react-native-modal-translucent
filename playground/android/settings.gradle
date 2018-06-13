@@ -1,0 +1,6 @@
+rootProject.name = 'ModalTranslucentTest'
+
+include ':app'
+
+include ':modal-translucent'
+project(':modal-translucent').projectDir = new File(rootProject.projectDir, '../../android')

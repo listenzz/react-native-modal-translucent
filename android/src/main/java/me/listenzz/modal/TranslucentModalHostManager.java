@@ -22,11 +22,11 @@ public class TranslucentModalHostManager extends ReactModalHostManager {
 
     @Override
     public LayoutShadowNode createShadowNodeInstance() {
-        return new LayoutShadowNode();
+        return new TranslucentModalHostShadowNode();
     }
 
     @Override
     public Class<? extends LayoutShadowNode> getShadowNodeClass() {
-        return LayoutShadowNode.class;
+        return TranslucentModalHostShadowNode.class;
     }
 }

@@ -24,8 +24,8 @@
     "postinstall": "npm run modal"
   },
   "peerDependencies": {
-    "react": "16.0.0",
-    "react-native": "0.51.0"
+    "react": ">=16.0.0",
+    "react-native": ">=0.50.3"
   },
   "devDependencies": {
     "react": "16.0.0",

@@ -1,6 +1,6 @@
 {
   "name": "react-native-modal-translucent",
-  "version": "1.1.6",
+  "version": "1.1.7",
   "description": "Remove the StatusBar background for Modal on Android.",
   "repository": {
     "type": "git",

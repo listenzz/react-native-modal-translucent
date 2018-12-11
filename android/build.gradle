@@ -1,36 +1,31 @@
 buildscript {
-  repositories {
-    jcenter()
-    google()
-    maven { url 'https://maven.google.com/' }
-  }
+    repositories {
+        google()
+        jcenter()
+    }
 
-  dependencies {
-    classpath 'com.android.tools.build:gradle:3.2.1'
-  }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.1.4'
+    }
 }
 
 apply plugin: 'com.android.library'
 
 android {
-  compileSdkVersion 26
-  buildToolsVersion "26.0.1"
+    compileSdkVersion 27
+    buildToolsVersion "27.0.3"
 
-  defaultConfig {
-    minSdkVersion 16
-    targetSdkVersion 26
-    versionCode 1
-    versionName "1.0"
-  }
-  lintOptions {
-    abortOnError false
-  }
-}
-
-repositories {
-  mavenCentral()
+    defaultConfig {
+        minSdkVersion 16
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+    }
+    lintOptions {
+        abortOnError false
+    }
 }
 
 dependencies {
-  compile "com.facebook.react:react-native:+"
+    implementation "com.facebook.react:react-native:+"
 }

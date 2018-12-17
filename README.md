@@ -12,7 +12,7 @@ Remove the StatusBar background for Modal on Android
 
 ### Usage
 
-#### First Install
+#### First
 
 ```bash
 npm install react-native-modal-translucent --save
@@ -24,15 +24,28 @@ npm install react-native-modal-translucent --save
 yarn add react-native-modal-translucent
 ```
 
-#### Last Link
+#### Second
 
 ```javascript
 $ react-native link react-native-modal-translucent
 ```
 
+#### Finally
+
+Modify package.json
+
+```diff
+ "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "test": "jest",
++   "fix-modal": "node node_modules/react-native-modal-translucent/scripts/translucent-modal.js",
++   "postinstall": "npm run fix-modal"
+ }
+```
+
 That is All !
 
-Now go to see the effect.
+Now run the app and see the effect.
 
 ## Caveat
 

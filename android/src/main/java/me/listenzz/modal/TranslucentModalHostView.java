@@ -37,6 +37,10 @@ public class TranslucentModalHostView extends ReactModalHostView {
     @TargetApi(23)
     private boolean isDark() {
         Activity activity = ((ReactContext) getContext()).getCurrentActivity();
+        // fix activity NPE
+        if (activity == null) {
+            return true;
+        }
         return (activity.getWindow().getDecorView().getSystemUiVisibility() & View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR) != 0;
     }
 

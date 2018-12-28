@@ -21,7 +21,6 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "./node_modules/.bin/eslint --fix --ext .js ./ && echo \"lint finished\" ",
     "modal": "node scripts/translucent-modal.js",
-    "postinstall": "npm run modal"
   },
   "peerDependencies": {
     "react": ">=16.0.0",

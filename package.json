@@ -1,6 +1,6 @@
 {
   "name": "react-native-modal-translucent",
-  "version": "1.1.9",
+  "version": "2.0.0",
   "description": "Remove the StatusBar background for Modal on Android.",
   "repository": {
     "type": "git",
@@ -19,8 +19,7 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "./node_modules/.bin/eslint --fix --ext .js ./ && echo \"lint finished\" ",
-    "modal": "node scripts/translucent-modal.js",
+    "lint": "./node_modules/.bin/eslint --fix --ext .js ./ && echo \"lint finished\" "
   },
   "peerDependencies": {
     "react": ">=16.0.0",

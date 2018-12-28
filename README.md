@@ -43,6 +43,12 @@ Modify package.json
  }
 ```
 
+Run fix-modal once
+
+```bash
+npm run fix-modal
+```
+
 That is All !
 
 Now run the app and see the effect.

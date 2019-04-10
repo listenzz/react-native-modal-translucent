@@ -58,11 +58,11 @@ First, modify your android/build.gradle
 ```diff
 buildscript {
 +    ext {
-+        buildToolsVersion = "27.0.3"
++        buildToolsVersion = "28.0.3"
 +        minSdkVersion = 16
-+        compileSdkVersion = 27
-+        targetSdkVersion = 26
-+        supportLibVersion = "27.1.1"
++        compileSdkVersion = 28
++        targetSdkVersion = 28
++        supportLibVersion = "28.0.0"
 +    }
 
     repositories {
@@ -76,8 +76,8 @@ buildscript {
 
     dependencies {
 -        classpath 'com.android.tools.build:gradle:2.3.3'
-+        // make sure your gardle version here is equal or greater than 3.1.4
-+        classpath 'com.android.tools.build:gradle:3.1.4'
++        // make sure your gardle version here is equal or greater than 3.3.2
++        classpath 'com.android.tools.build:gradle:3.3.2'
     }
 }
 
@@ -106,7 +106,7 @@ allprojects {
 
 
 +task wrapper(type: Wrapper) {
-+    gradleVersion = '4.4'
++    gradleVersion = '4.10.1'
 +    distributionUrl = distributionUrl.replace("bin", "all")
 +}
 ```
@@ -119,5 +119,5 @@ distributionPath=wrapper/dists
 zipStoreBase=GRADLE_USER_HOME
 zipStorePath=wrapper/dists
 -distributionUrl=https\://services.gradle.org/distributions/gradle-3.5.1-all.zip
-+distributionUrl=https\://services.gradle.org/distributions/gradle-4.4-all.zip
++distributionUrl=https\://services.gradle.org/distributions/gradle-4.10.1-all.zip
 ```

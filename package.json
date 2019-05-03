@@ -19,7 +19,8 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "./node_modules/.bin/eslint --fix --ext .js ./ && echo \"lint finished\" "
+    "lint": "./node_modules/.bin/eslint --fix --ext .js ./ && echo \"lint finished\" ",
+    "modal": "node scripts/translucent-modal.js"
   },
   "peerDependencies": {
     "react": ">=16.0.0",
@@ -28,6 +29,7 @@
   "devDependencies": {
     "@babel/core": "^7.3.4",
     "@babel/runtime": "^7.3.4",
+    "babel-eslint": "^10.0.1",
     "eslint": "^5.15.3",
     "eslint-config-prettier": "^4.1.0",
     "eslint-plugin-prettier": "^3.0.1",

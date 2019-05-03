@@ -54,23 +54,20 @@ export default class App extends Component {
           <View
             style={{
               flex: 1,
-              justifyContent: "center",
+              justifyContent: "space-between",
               alignItems: "center",
-              padding: 32,
+              padding: 0,
               backgroundColor: "rgba(0,0,0,0.5)"
             }}
           >
-            <View>
-              <Text>Hello World!</Text>
-
-              <TouchableHighlight
-                onPress={() => {
-                  this.setModalVisible(!this.state.modalVisible);
-                }}
-              >
-                <Text>Hide Modal</Text>
-              </TouchableHighlight>
-            </View>
+            <Text>Hello World!</Text>
+            <TouchableHighlight
+              onPress={() => {
+                this.setModalVisible(!this.state.modalVisible);
+              }}
+            >
+              <Text>Hide Modal</Text>
+            </TouchableHighlight>
           </View>
         </Modal>
 

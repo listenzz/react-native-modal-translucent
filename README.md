@@ -4,11 +4,11 @@ Remove the StatusBar background for Modal on Android
 
 ### Before
 
-<img src="./screenshot/before.jpg" width=300>
+<img src="./screenshot/before.jpg" width=320>
 
 ### After
 
-<img src="./screenshot/after.png" width=300>
+<img src="./screenshot/after.png" width=320>
 
 ### Usage
 

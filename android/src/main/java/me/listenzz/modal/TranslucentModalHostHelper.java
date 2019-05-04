@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Point;
+import android.os.Build;
 import android.view.Display;
 import android.view.WindowManager;
 
@@ -42,7 +43,7 @@ public class TranslucentModalHostHelper {
         Resources resources = context.getResources();
         int statusBarId = resources.getIdentifier("status_bar_height", "dimen", "android");
         int statusBarHeight = 0;
-        if (windowFullscreen && statusBarId > 0) {
+        if ((windowFullscreen || Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) && statusBarId > 0) {
             statusBarHeight = (int) resources.getDimension(statusBarId);
         }
 

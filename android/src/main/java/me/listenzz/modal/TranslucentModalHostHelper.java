@@ -13,12 +13,15 @@ import android.view.WindowManager;
 
 import com.facebook.infer.annotation.Assertions;
 
+import java.lang.reflect.Method;
+
 import static android.view.View.NO_ID;
 
 public class TranslucentModalHostHelper {
     private static final Point MIN_POINT = new Point();
     private static final Point MAX_POINT = new Point();
     private static final Point SIZE_POINT = new Point();
+    private static final String NAVIGATION = "navigationBarBackground";
 
     /**
      * To get the size of the screen, we use information from the WindowManager and
@@ -53,7 +56,7 @@ public class TranslucentModalHostHelper {
         }
 
         int navigationBarHeight = 0;
-        if (activity!= null && !isNavigationBarExist(activity)) {
+        if (hasNavigationBar(context) && !navigationGestureEnabled(activity)) {
             navigationBarHeight = getNavigationHeight(context);
         }
 
@@ -66,11 +69,32 @@ public class TranslucentModalHostHelper {
         }
     }
 
-    private static final String NAVIGATION = "navigationBarBackground";
+    // 判断是否存在NavigationBar
+    private static boolean hasNavigationBar(Context context) {
+        boolean hasNavigationBar = false;
+        Resources rs = context.getResources();
+        int id = rs.getIdentifier("config_showNavigationBar", "bool", "android");
+        if (id > 0) {
+            hasNavigationBar = rs.getBoolean(id);
+        }
+        try {
+            //反射获取SystemProperties类，并调用它的get方法
+            Class systemPropertiesClass = Class.forName("android.os.SystemProperties");
+            Method m = systemPropertiesClass.getMethod("get", String.class);
+            String navBarOverride = (String) m.invoke(systemPropertiesClass, "qemu.hw.mainkeys");
+            if ("1".equals(navBarOverride)) {
+                hasNavigationBar = false;
+            } else if ("0".equals(navBarOverride)) {
+                hasNavigationBar = true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return hasNavigationBar;
+    }
 
-    // 该方法需要在View完全被绘制出来之后调用，否则判断不了
-    //在比如 onWindowFocusChanged（）方法中可以得到正确的结果
-    public static boolean isNavigationBarExist(@NonNull Activity activity) {
+    // 全面屏判断
+    private static boolean navigationGestureEnabled(@NonNull Activity activity) {
         ViewGroup vp = (ViewGroup) activity.getWindow().getDecorView();
         if (vp != null) {
             for (int i = 0; i < vp.getChildCount(); i++) {
@@ -83,7 +107,7 @@ public class TranslucentModalHostHelper {
         return false;
     }
 
-    public static int getNavigationHeight(Context activity) {
+    private static int getNavigationHeight(Context activity) {
         if (activity == null) {
             return 0;
         }

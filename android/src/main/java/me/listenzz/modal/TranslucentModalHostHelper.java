@@ -1,14 +1,19 @@
 package me.listenzz.modal;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Point;
 import android.os.Build;
+import android.support.annotation.NonNull;
 import android.view.Display;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 
 import com.facebook.infer.annotation.Assertions;
+
+import static android.view.View.NO_ID;
 
 public class TranslucentModalHostHelper {
     private static final Point MIN_POINT = new Point();
@@ -25,7 +30,7 @@ public class TranslucentModalHostHelper {
      * and landscape on tablets.
      * This should only be called on the native modules/shadow nodes thread.
      */
-    public static Point getModalHostSize(Context context) {
+    public static Point getModalHostSize(Context context, Activity activity) {
         WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         Display display = Assertions.assertNotNull(wm).getDefaultDisplay();
         // getCurrentSizeRange will return the min and max width and height that the window can be
@@ -47,12 +52,49 @@ public class TranslucentModalHostHelper {
             statusBarHeight = (int) resources.getDimension(statusBarId);
         }
 
+        int navigationBarHeight = 0;
+        if (activity!= null && !isNavigationBarExist(activity)) {
+            navigationBarHeight = getNavigationHeight(context);
+        }
+
         if (SIZE_POINT.x < SIZE_POINT.y) {
             // If we are vertical the width value comes from min width and height comes from max height
-            return new Point(MIN_POINT.x, MAX_POINT.y + statusBarHeight);
+            return new Point(MIN_POINT.x, MAX_POINT.y + statusBarHeight + navigationBarHeight);
         } else {
             // If we are horizontal the width value comes from max width and height comes from min height
-            return new Point(MAX_POINT.x, MIN_POINT.y + statusBarHeight);
+            return new Point(MAX_POINT.x, MIN_POINT.y + statusBarHeight + navigationBarHeight);
         }
+    }
+
+    private static final String NAVIGATION = "navigationBarBackground";
+
+    // 该方法需要在View完全被绘制出来之后调用，否则判断不了
+    //在比如 onWindowFocusChanged（）方法中可以得到正确的结果
+    public static boolean isNavigationBarExist(@NonNull Activity activity) {
+        ViewGroup vp = (ViewGroup) activity.getWindow().getDecorView();
+        if (vp != null) {
+            for (int i = 0; i < vp.getChildCount(); i++) {
+                vp.getChildAt(i).getContext().getPackageName();
+                if (vp.getChildAt(i).getId() != NO_ID && NAVIGATION.equals(activity.getResources().getResourceEntryName(vp.getChildAt(i).getId()))) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public static int getNavigationHeight(Context activity) {
+        if (activity == null) {
+            return 0;
+        }
+        Resources resources = activity.getResources();
+        int resourceId = resources.getIdentifier("navigation_bar_height",
+                "dimen", "android");
+        int height = 0;
+        if (resourceId > 0) {
+            //获取NavigationBar的高度
+            height = resources.getDimensionPixelSize(resourceId);
+        }
+        return height;
     }
 }

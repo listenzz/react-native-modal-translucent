@@ -10,11 +10,8 @@ import android.support.annotation.NonNull;
 import android.view.Display;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-
 import com.facebook.infer.annotation.Assertions;
-
 import java.lang.reflect.Method;
-
 import static android.view.View.NO_ID;
 
 public class TranslucentModalHostHelper {

@@ -10,8 +10,11 @@ import android.support.annotation.NonNull;
 import android.view.Display;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+
 import com.facebook.infer.annotation.Assertions;
+
 import java.lang.reflect.Method;
+
 import static android.view.View.NO_ID;
 
 public class TranslucentModalHostHelper {
@@ -52,10 +55,7 @@ public class TranslucentModalHostHelper {
             statusBarHeight = (int) resources.getDimension(statusBarId);
         }
 
-        int navigationBarHeight = 0;
-        if (hasNavigationBar(context) && !navigationGestureEnabled(activity)) {
-            navigationBarHeight = getNavigationHeight(context);
-        }
+        int navigationBarHeight = realNavigationHeight(context, activity);
 
         if (SIZE_POINT.x < SIZE_POINT.y) {
             // If we are vertical the width value comes from min width and height comes from max height
@@ -66,7 +66,11 @@ public class TranslucentModalHostHelper {
         }
     }
 
-    // 判断是否存在NavigationBar
+    /**
+     * 判断是否存在NavigationBar
+     * @param context
+     * @return
+     */
     private static boolean hasNavigationBar(Context context) {
         boolean hasNavigationBar = false;
         Resources rs = context.getResources();
@@ -90,7 +94,11 @@ public class TranslucentModalHostHelper {
         return hasNavigationBar;
     }
 
-    // 全面屏判断
+    /**
+     * 全面屏判断
+     * @param activity
+     * @return
+     */
     private static boolean navigationGestureEnabled(@NonNull Activity activity) {
         ViewGroup vp = (ViewGroup) activity.getWindow().getDecorView();
         if (vp != null) {
@@ -104,11 +112,16 @@ public class TranslucentModalHostHelper {
         return false;
     }
 
-    private static int getNavigationHeight(Context activity) {
-        if (activity == null) {
+    /**
+     * 获取NavigationBar的高度
+     * @param context
+     * @return
+     */
+    private static int getNavigationHeight(Context context) {
+        if (context == null) {
             return 0;
         }
-        Resources resources = activity.getResources();
+        Resources resources = context.getResources();
         int resourceId = resources.getIdentifier("navigation_bar_height",
                 "dimen", "android");
         int height = 0;
@@ -117,5 +130,24 @@ public class TranslucentModalHostHelper {
             height = resources.getDimensionPixelSize(resourceId);
         }
         return height;
+    }
+
+    /**
+     * 获取真实的NavigationHeight
+     * @param context
+     * @param activity
+     * @return
+     */
+    private static int realNavigationHeight(Context context, Activity activity) {
+        int navigationBarHeight = 0;
+        String manufacturer = Build.MANUFACTURER;
+        // 这个字符串可以自己定义,例如判断华为就填写huawei,魅族就填写meizu
+        if ("huawei".equalsIgnoreCase(manufacturer)) {
+        } else {
+            if (hasNavigationBar(context) && !navigationGestureEnabled(activity)) {
+                navigationBarHeight = getNavigationHeight(context);
+            }
+        }
+        return navigationBarHeight;
     }
 }

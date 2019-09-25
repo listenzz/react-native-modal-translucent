@@ -10,7 +10,7 @@ public class TranslucentModalHostShadowNode extends LayoutShadowNode {
     @Override
     public void addChildAt(ReactShadowNodeImpl child, int i) {
         super.addChildAt(child, i);
-        Point modalSize = TranslucentModalHostHelper.getModalHostSize(getThemedContext());
+        Point modalSize = TranslucentModalHostHelper.getModalHostSize(getThemedContext(), getThemedContext().getCurrentActivity());
         child.setStyleWidth(modalSize.x);
         child.setStyleHeight(modalSize.y);
     }

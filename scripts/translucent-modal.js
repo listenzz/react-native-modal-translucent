@@ -31,10 +31,17 @@ if (fs.existsSync(modalComponent)) {
         /'RCTModalHostView'/gm,
         `Platform.OS === 'ios' ? 'RCTModalHostView' : 'TranslucentModalHostView'`
       );
-      str = str.replace(
-        /module\.exports/,
-        `const Platform = require('Platform');\nmodule\.exports`
-      );
+      if (data.search(/module\.exports/) === -1) {
+        str = str.replace(
+          /'use strict';/,
+          `'use strict';\n\nimport { Platform } from 'react-native';`
+        );
+      } else {
+        str = str.replace(
+          /module\.exports/,
+          `const Platform = require('Platform');\nmodule\.exports`
+        );
+      }
       fs.outputFile(modalComponent, str);
     }
   });

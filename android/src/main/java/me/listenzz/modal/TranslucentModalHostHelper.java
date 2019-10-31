@@ -6,7 +6,7 @@ import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Point;
 import android.os.Build;
-import androidx.annotation.Nullable;
+import androidx.annotation.NonNull;
 import android.view.Display;
 import android.view.ViewGroup;
 import android.view.WindowManager;

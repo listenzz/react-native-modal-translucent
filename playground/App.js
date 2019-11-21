@@ -60,13 +60,13 @@ export default class App extends Component {
               backgroundColor: "rgba(0,0,0,0.5)"
             }}
           >
-            <Text>Hello World!</Text>
+            <Text style={{ fontSize: 36}}>Hello Modal!</Text>
             <TouchableHighlight
               onPress={() => {
                 this.setModalVisible(!this.state.modalVisible);
               }}
             >
-              <Text>Hide Modal</Text>
+              <Text style={{ fontSize: 24}}>Hide Modal</Text>
             </TouchableHighlight>
           </View>
         </Modal>

@@ -18,7 +18,7 @@ npm install react-native-modal-translucent --save
 yarn add react-native-modal-translucent
 ```
 
-If your RN version is below 0.60, you need to link manual.
+If your RN version is below 0.60, you need to link manually.
 
 ```
 react-native link react-native-modal-translucent

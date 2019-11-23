@@ -6,13 +6,12 @@ import com.facebook.react.uimanager.ThemedReactContext;
 import com.facebook.react.views.modal.ReactModalHostManager;
 import com.facebook.react.views.modal.ReactModalHostView;
 
-@ReactModule(name = TranslucentModalHostManager.REACT_CLASS)
+@ReactModule(name = ReactModalHostManager.REACT_CLASS)
 public class TranslucentModalHostManager extends ReactModalHostManager {
-    protected static final String REACT_CLASS = "TranslucentModalHostView";
 
     @Override
-    public String getName() {
-        return REACT_CLASS;
+    public boolean canOverrideExistingModule() {
+        return true;
     }
 
     @Override
